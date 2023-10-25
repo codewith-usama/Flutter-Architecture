@@ -1,0 +1,3 @@
+class HomeMasterInitialParams {
+  const HomeMasterInitialParams();
+}
