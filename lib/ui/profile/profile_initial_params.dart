@@ -1,0 +1,3 @@
+class ProfileInitialParams {
+  const ProfileInitialParams();
+}
