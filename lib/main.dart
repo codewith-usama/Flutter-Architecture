@@ -2,16 +2,17 @@ import 'package:architecture/data/mock_auth_repository.dart';
 import 'package:architecture/data/rest_api_users_repository.dart';
 import 'package:architecture/domain/repositories/auth_repository.dart';
 import 'package:architecture/domain/repositories/users_repository.dart';
+import 'package:architecture/domain/stores/user_store.dart';
 import 'package:architecture/domain/use_cases/social_login_use_case.dart';
 import 'package:architecture/navigation/app_navigator.dart';
 import 'package:architecture/network/network_repository.dart';
 import 'package:architecture/ui/home_master/home_master_cubit.dart';
 import 'package:architecture/ui/home_master/home_master_initial_params.dart';
 import 'package:architecture/ui/home_master/home_master_navigator.dart';
-import 'package:architecture/ui/profile/onboarding_cubit.dart';
-import 'package:architecture/ui/profile/onboarding_initial_params.dart';
-import 'package:architecture/ui/profile/onboarding_navigator.dart';
-import 'package:architecture/ui/profile/onboarding_page.dart';
+import 'package:architecture/ui/onboarding/onboarding_cubit.dart';
+import 'package:architecture/ui/onboarding/onboarding_initial_params.dart';
+import 'package:architecture/ui/onboarding/onboarding_navigator.dart';
+import 'package:architecture/ui/onboarding/onboarding_page.dart';
 import 'package:architecture/ui/user_details/user_details_cubit.dart';
 import 'package:architecture/ui/user_details/user_details_initial_params.dart';
 import 'package:architecture/ui/users_list/users_list_initial_params.dart';
@@ -32,10 +33,20 @@ void main() {
   getIt.registerSingleton<HomeMasterNavigator>(HomeMasterNavigator());
   getIt.registerSingleton<OnboardingNavigator>(OnboardingNavigator(getIt()));
 
-  getIt.registerSingleton<SocialLoginUseCase>(SocialLoginUseCase(getIt()));
+  getIt.registerSingleton<UserStore>(UserStore());
+
+  getIt.registerSingleton<SocialLoginUseCase>(
+    SocialLoginUseCase(
+      getIt(),
+      getIt(),
+    ),
+  );
 
   getIt.registerFactoryParam<HomeMasterCubit, HomeMasterInitialParams, dynamic>(
-    (param1, _) => HomeMasterCubit(param1),
+    (param1, _) => HomeMasterCubit(
+      param1,
+      getIt(),
+    ),
   );
 
   getIt.registerFactoryParam<UsersListCubit, UserListInitialParams, dynamic>(
@@ -70,7 +81,6 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

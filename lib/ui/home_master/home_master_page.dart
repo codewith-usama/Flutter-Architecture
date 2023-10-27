@@ -1,4 +1,6 @@
+import 'package:architecture/ui/home_master/home_master_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home_master_cubit.dart';
 
 class HomeMasterPage extends StatefulWidget {
@@ -19,13 +21,22 @@ class _HomeMasterState extends State<HomeMasterPage> {
   @override
   void initState() {
     super.initState();
+    cubit.onInt();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Center(child: Text('Home')),
+      body: Center(
+        child: BlocBuilder(
+          bloc: cubit,
+          builder: (context, state) {
+            state as HomeMasterState;
+            return Text(state.user.name);
+          },
+        ),
+      ),
     );
   }
 }

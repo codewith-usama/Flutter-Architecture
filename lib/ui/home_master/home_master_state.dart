@@ -1,11 +1,20 @@
+import 'package:architecture/domain/entites/user.dart';
 import 'home_master_initial_params.dart';
 
 class HomeMasterState {
-  const HomeMasterState();
+  final User user;
+
+  const HomeMasterState({
+    required this.user,
+  });
 
   factory HomeMasterState.initial(
           {required HomeMasterInitialParams initialParams}) =>
-      const HomeMasterState();
+      const HomeMasterState(
+        user: User.empty(),
+      );
 
-  HomeMasterState copyWith() => const HomeMasterState();
+  HomeMasterState copyWith({User? user}) => HomeMasterState(
+        user: user ?? this.user,
+      );
 }
