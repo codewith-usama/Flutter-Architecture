@@ -1,9 +1,9 @@
 import 'package:architecture/domain/entites/user.dart';
 import 'package:architecture/domain/repositories/users_repository.dart';
-import 'package:architecture/ui/user_details/user_details_initial_params.dart';
-import 'package:architecture/ui/users_list/users_list_initial_params.dart';
-import 'package:architecture/ui/users_list/users_list_navigator.dart';
-import 'package:architecture/ui/users_list/users_list_state.dart';
+import 'package:architecture/features/user_details/user_details_initial_params.dart';
+import 'package:architecture/features/users_list/users_list_initial_params.dart';
+import 'package:architecture/features/users_list/users_list_navigator.dart';
+import 'package:architecture/features/users_list/users_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UsersListCubit extends Cubit<UsersListState> {

@@ -1,7 +1,7 @@
-import 'package:architecture/ui/home_master/home_master_state.dart';
+import 'package:architecture/features/home_master/home_master_cubit.dart';
+import 'package:architecture/features/home_master/home_master_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'home_master_cubit.dart';
 
 class HomeMasterPage extends StatefulWidget {
   final HomeMasterCubit cubit;

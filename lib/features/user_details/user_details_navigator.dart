@@ -1,7 +1,7 @@
+import 'package:architecture/features/user_details/user_details_initial_params.dart';
 import 'package:architecture/main.dart';
 import 'package:architecture/navigation/app_navigator.dart';
-import 'package:architecture/ui/user_details/user_details_initial_params.dart';
-import 'package:architecture/ui/user_details/user_details_page.dart';
+import 'package:architecture/features/user_details/user_details_page.dart';
 import 'package:flutter/material.dart';
 
 class UserDetailsNavigator {}

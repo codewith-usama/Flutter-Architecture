@@ -1,4 +1,4 @@
-import 'onboarding_initial_params.dart';
+import '../../features/onboarding/onboarding_initial_params.dart';
 
 class OnboardingState {
   final bool isLoading;

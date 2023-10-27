@@ -1,4 +1,4 @@
-import 'package:architecture/ui/onboarding/onboarding_state.dart';
+import 'package:architecture/features/onboarding/onboarding_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'onboarding_cubit.dart';

@@ -1,6 +1,6 @@
-import 'package:architecture/ui/users_list/users_list_cubit.dart';
-import 'package:architecture/ui/users_list/users_list_state.dart';
-import 'package:architecture/ui/widgets/user_card.dart';
+import 'package:architecture/features/users_list/users_list_cubit.dart';
+import 'package:architecture/features/users_list/users_list_state.dart';
+import 'package:architecture/features/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

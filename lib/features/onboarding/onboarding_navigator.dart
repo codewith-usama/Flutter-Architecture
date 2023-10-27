@@ -1,4 +1,4 @@
-import 'package:architecture/ui/home_master/home_master_navigator.dart';
+import 'package:architecture/features/home_master/home_master_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:architecture/main.dart';
 import 'package:architecture/navigation/app_navigator.dart';

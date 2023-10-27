@@ -1,5 +1,5 @@
 import 'package:architecture/domain/entites/user.dart';
-import 'package:architecture/ui/user_details/user_details_initial_params.dart';
+import 'package:architecture/features/user_details/user_details_initial_params.dart';
 
 class UserDetailsState {
   final User user;
