@@ -1,3 +1,5 @@
+import 'package:architecture/domain/failure/get_user_failure.dart';
+import 'package:architecture/domain/failure/update_user_failure.dart';
 import 'package:architecture/domain/failure/users_list_failure.dart';
 import 'package:architecture/domain/repositories/users_repository.dart';
 import 'package:architecture/domain/entites/user.dart';
@@ -23,4 +25,15 @@ class RestApiUsersRepository implements UsersRepository {
               },
             ),
           );
+
+  @override
+  Future<Either<UpdateUserFailure, bool>> updateUser(User user) async =>
+      right(true);
+
+  @override
+  Future<Either<GetUserFailure, User>> getUserByEmail(String email) async {
+    Future.delayed(const Duration(seconds: 1));
+    return right(const User.empty()
+        .copywith(name: 'Usama', id: 123, email: 'usama@gmail.com'));
+  }
 }

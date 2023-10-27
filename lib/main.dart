@@ -1,8 +1,11 @@
+import 'package:architecture/data/insecure_local_storage_repositort.dart';
 import 'package:architecture/data/mock_auth_repository.dart';
-import 'package:architecture/data/rest_api_users_repository.dart';
+import 'package:architecture/data/mock_users_repository.dart';
 import 'package:architecture/domain/repositories/auth_repository.dart';
+import 'package:architecture/domain/repositories/local_storage_repository.dart';
 import 'package:architecture/domain/repositories/users_repository.dart';
 import 'package:architecture/domain/stores/user_store.dart';
+import 'package:architecture/domain/use_cases/check_for_existing_user_use_case.dart';
 import 'package:architecture/domain/use_cases/social_login_use_case.dart';
 import 'package:architecture/navigation/app_navigator.dart';
 import 'package:architecture/network/network_repository.dart';
@@ -25,8 +28,10 @@ final getIt = GetIt.instance;
 
 void main() {
   getIt.registerSingleton<NetworkRepository>(NetworkRepository());
-  getIt.registerSingleton<UsersRepository>(RestApiUsersRepository(getIt()));
+  getIt.registerSingleton<UsersRepository>(MockUsersRepository());
   getIt.registerSingleton<AuthRepository>(MockAuthRepository());
+  getIt.registerSingleton<LocalStorageRepository>(
+      InsecureLocalStorageRepository());
 
   getIt.registerSingleton<AppNavigator>(AppNavigator());
   getIt.registerSingleton<UsersListNavigator>(UsersListNavigator(getIt()));
@@ -35,8 +40,18 @@ void main() {
 
   getIt.registerSingleton<UserStore>(UserStore());
 
+  getIt.registerSingleton<CheckForExistingUserUseCase>(
+    CheckForExistingUserUseCase(
+      getIt(),
+      getIt(),
+      getIt(),
+    ),
+  );
+
   getIt.registerSingleton<SocialLoginUseCase>(
     SocialLoginUseCase(
+      getIt(),
+      getIt(),
       getIt(),
       getIt(),
     ),
@@ -67,6 +82,7 @@ void main() {
   getIt.registerFactoryParam<OnboardingCubit, OnboardingInitialParams, dynamic>(
     (param1, _) => OnboardingCubit(
       param1,
+      getIt(),
       getIt(),
       getIt(),
     ),
