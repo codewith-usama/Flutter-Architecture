@@ -1,4 +1,5 @@
 import 'package:architecture/domain/use_cases/check_for_existing_user_use_case.dart';
+import 'package:architecture/domain/use_cases/get_theme_use_case.dart';
 import 'package:architecture/domain/use_cases/social_login_use_case.dart';
 import 'package:architecture/features/home_master/home_master_initial_params.dart';
 import 'package:architecture/features/onboarding/onboarding_navigator.dart';
@@ -11,15 +12,18 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   final SocialLoginUseCase _socialLoginUseCase;
   final OnboardingNavigator navigator;
   final CheckForExistingUserUseCase _checkForExistingUserUseCase;
+  final GetThemeUseCase _getThemeUseCase;
 
   OnboardingCubit(
     this.initialParams,
     this._socialLoginUseCase,
     this.navigator,
     this._checkForExistingUserUseCase,
+    this._getThemeUseCase,
   ) : super(OnboardingState.initial(initialParams: initialParams));
 
   onInit() {
+    _getThemeUseCase.execute();
     emit(state.copyWith(isLoading: true));
 
     _checkForExistingUserUseCase.execute().then(

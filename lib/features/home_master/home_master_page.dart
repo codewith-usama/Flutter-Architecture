@@ -33,7 +33,18 @@ class _HomeMasterState extends State<HomeMasterPage> {
           bloc: cubit,
           builder: (context, state) {
             state as HomeMasterState;
-            return Text(state.user.name);
+            return Column(
+              children: [
+                Text(state.user.name),
+                ListTile(
+                  title: const Text('Dark Theme'),
+                  trailing: Switch(
+                    onChanged: cubit.onThemeChanged,
+                    value: state.isDarkTheme,
+                  ),
+                ),
+              ],
+            );
           },
         ),
       ),

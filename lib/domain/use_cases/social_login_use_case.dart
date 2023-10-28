@@ -29,7 +29,7 @@ class SocialLoginUseCase {
                       LoginFailure(error: failure.error),
                     ),
                     (r) => localStorageRepository
-                        .set('USER_EMAIL', user.email)
+                        .setString('USER_EMAIL', user.email)
                         .then(
                           (value) => value.fold(
                             (l) => left(LoginFailure(error: l.error)),
