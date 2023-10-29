@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
-  final int id;
+  final String id;
   final String name;
   final String username;
   final String email;
@@ -18,7 +18,7 @@ class User extends Equatable {
   });
 
   User copywith({
-    int? id,
+    String? id,
     String? name,
     String? username,
     String? email,
@@ -35,7 +35,7 @@ class User extends Equatable {
       );
 
   const User.empty()
-      : id = 000,
+      : id = "000",
         name = '',
         username = '',
         email = '',

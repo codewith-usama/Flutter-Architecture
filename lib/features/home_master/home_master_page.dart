@@ -36,6 +36,7 @@ class _HomeMasterState extends State<HomeMasterPage> {
             return Column(
               children: [
                 Text(state.user.name),
+                Text(state.user.email),
                 ListTile(
                   title: const Text('Dark Theme'),
                   trailing: Switch(

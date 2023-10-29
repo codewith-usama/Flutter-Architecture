@@ -8,6 +8,6 @@ class MockAuthRepository implements AuthRepository {
   Future<Either<LoginFailure, User>> login() async {
     await Future.delayed(const Duration(seconds: 2));
     return right(const User.empty()
-        .copywith(name: 'Usama', id: 123, email: 'usama@gmail.com'));
+        .copywith(name: 'Usama', id: "123", email: 'usama@gmail.com'));
   }
 }

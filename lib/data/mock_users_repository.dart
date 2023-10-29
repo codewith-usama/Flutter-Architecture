@@ -10,7 +10,7 @@ class MockUsersRepository implements UsersRepository {
   Future<Either<UsersListFailure, List<User>>> getUsers() async => right(
         [
           const User(
-            id: 123,
+            id: "123",
             name: 'name',
             username: 'username',
             email: 'email',
@@ -30,6 +30,6 @@ class MockUsersRepository implements UsersRepository {
   Future<Either<GetUserFailure, User>> getUserByEmail(String email) async {
     Future.delayed(const Duration(seconds: 1));
     return right(const User.empty()
-        .copywith(name: 'Usama', id: 123, email: 'usama@gmail.com'));
+        .copywith(name: 'Usama', id: "123", email: 'usama@gmail.com'));
   }
 }

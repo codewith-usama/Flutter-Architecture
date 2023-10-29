@@ -27,11 +27,20 @@ class UserJson {
       );
 
   User toDomain() => User(
-        id: id,
+        id: id.toString(),
         name: name,
         username: username,
         email: email,
         phone: phone,
         website: website,
       );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'username': username,
+        'email': email,
+        'phone': phone,
+        'website': website,
+      };
 }

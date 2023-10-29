@@ -1,6 +1,6 @@
+import 'package:architecture/data/firebase_auth_repository.dart';
+import 'package:architecture/data/firebase_users_repository.dart';
 import 'package:architecture/data/insecure_local_storage_repositort.dart';
-import 'package:architecture/data/mock_auth_repository.dart';
-import 'package:architecture/data/mock_users_repository.dart';
 import 'package:architecture/domain/repositories/auth_repository.dart';
 import 'package:architecture/domain/repositories/local_storage_repository.dart';
 import 'package:architecture/domain/repositories/users_repository.dart';
@@ -15,6 +15,7 @@ import 'package:architecture/features/home_master/home_master_initial_params.dar
 import 'package:architecture/features/user_details/user_details_cubit.dart';
 import 'package:architecture/features/user_details/user_details_initial_params.dart';
 import 'package:architecture/features/users_list/users_list_initial_params.dart';
+import 'package:architecture/firebase_options.dart';
 import 'package:architecture/navigation/app_navigator.dart';
 import 'package:architecture/network/network_repository.dart';
 import 'package:architecture/features/home_master/home_master_navigator.dart';
@@ -28,13 +29,18 @@ import 'package:architecture/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 final getIt = GetIt.instance;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   getIt.registerSingleton<NetworkRepository>(NetworkRepository());
-  getIt.registerSingleton<UsersRepository>(MockUsersRepository());
-  getIt.registerSingleton<AuthRepository>(MockAuthRepository());
+  getIt.registerSingleton<UsersRepository>(FirebaseUsersRepository());
+  getIt.registerSingleton<AuthRepository>(FirebaseAuthRepository());
   getIt.registerSingleton<LocalStorageRepository>(
       InsecureLocalStorageRepository());
 
@@ -120,15 +126,16 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-        bloc: getIt<ThemeStore>(),
-        builder: (context, state) {
-          state as bool;
-          return MaterialApp(
-            title: 'Flutter Demo',
-            theme: state ? darkTheme : lightTheme,
-            home: OnboardingPage(
-                cubit: getIt(param1: const OnboardingInitialParams())),
-          );
-        });
+      bloc: getIt<ThemeStore>(),
+      builder: (context, state) {
+        state as bool;
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: state ? darkTheme : lightTheme,
+          home: OnboardingPage(
+              cubit: getIt(param1: const OnboardingInitialParams())),
+        );
+      },
+    );
   }
 }
